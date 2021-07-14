@@ -13,8 +13,8 @@ server.use(express.json());
 //Routes
 server.use("/api", ApiRouter);
 
-server.listen(8000, () => {
-  console.log("Server is running in port 8000");
+server.listen(7000, () => {
+  console.log("Server is running in port 7000");
 });
 
 export default server;
