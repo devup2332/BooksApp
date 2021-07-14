@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  server:
+    build: ./server
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    volumes:
+      - "./server:/server"
+    command: npm start
+    depends_on:
+      - db_books
+    networks:
+      - books_net
+
+  db_books:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_USER: oasis
+      POSTGRES_DB: booksapp
+    networks:
+      - books_net
+
+networks:
+  books_net:
+    driver: bridge
