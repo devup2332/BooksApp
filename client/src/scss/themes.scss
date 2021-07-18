@@ -1,0 +1,21 @@
+$themes: (
+    light: (
+        bg-1:  linear-gradient(180deg, #0A2E36 0%, #2090A9 60.94%, #FFFFFF 100%),
+        bg-2: #ffffff,
+        text-color-2: #ffffff
+    ),
+    dark: (
+        bg-1: linear-gradient(180deg, #7E002E 0%, #08172C 100%),
+        bg-2: #000000,
+        text-color-2: #ffffff
+    )
+);
+
+@each $theme,$map in $themes {
+   .#{$theme}__theme {
+        --main-bg-1: #{map-get($map,"bg-1")};
+        --main-bg-2: #{map-get($map,"bg-2")};
+        --main-text-color-2: #{map-get($map,"text-color-2")};
+   }
+}
+
