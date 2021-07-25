@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BookComponent from "../../components/Book/BookComponent";
 import { Book }  from "../../models/book";
 import { Gender } from "../../models/gender";
+import useBooks from "../../hooks/books.hook";
 
 const HomePage = () => {
 
@@ -10,7 +11,12 @@ const HomePage = () => {
 
   const [gender, setGender] = useState<number>(1);
 
+  const [getBooks] = useBooks();
   useEffect(() => {
+     (async()=> {
+      const books = await getBooks();
+      console.log(books)
+    })();
     document.body.classList.add("light__theme");
   }, []);
 
