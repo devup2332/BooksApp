@@ -15,6 +15,18 @@ services:
     networks:
       - books_net
 
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    command: npm start
+    volumes:
+      - "./client:/client"
+    networks:
+      - books_net
+
   db_books:
     image: postgres
     environment:

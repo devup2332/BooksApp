@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+svg {
+  display: block;
+}
+
+input {
+  display: block;
+  width: 100%;
+  outline: none;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+
+//Pages
+@import "./pages/Home/HomePage.scss";
+
+//Global Components
+@import "./components/Header/HeaderComponent.scss";
+@import "./components/Book/BookComponent.scss";

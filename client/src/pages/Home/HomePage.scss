@@ -1,0 +1,36 @@
+@import "../../scss/variables.scss";
+
+.home-page-container {
+  background: var(--main-bg-1);
+  padding: 60px;
+
+  button {
+  }
+
+  .home-page-container-genders {
+    display: flex;
+    border-bottom: 1px solid #333333;
+    margin-bottom: 20px;
+
+    .gender-item:not(:last-child) {
+      margin-right: 30px;
+    }
+
+    .gender-item {
+      list-style-type: none;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333333;
+    }
+
+    .gender-item:hover {
+      color: #000;
+    }
+  }
+
+  .home-page-container-books {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}
