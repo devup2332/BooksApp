@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../database";
 import AssignedGenres from "./assigned-genre.model";
+import Favorites from "./favorite.model";
 
 class Books extends Model {
   public id!: number;
@@ -41,6 +42,17 @@ Books.hasMany(AssignedGenres, {
 AssignedGenres.belongsTo(Books, {
   foreignKey: "bookId",
   as: "books"
+});
+
+Books.hasMany(Favorites,{
+  sourceKey: 'id',
+  foreignKey: 'bookId',
+  as: 'favorites'
+});
+
+Favorites.belongsTo(Books,{
+  foreignKey: 'bookId',
+  as: 'books'
 });
 
 export default Books;
