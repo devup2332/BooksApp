@@ -1,0 +1,26 @@
+@import "../../scss/variables.scss";
+
+.home-page-container-genders {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 20px;
+    width: 90%;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.35);
+    overflow-x: auto;
+    scrollbar-color: #6969dd #e0e0e0;
+    scrollbar-width: thin;
+
+    .gender-item {
+      list-style-type: none;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333333;
+    }
+
+    .gender-item:hover {
+      color: #000;
+    }
+}
