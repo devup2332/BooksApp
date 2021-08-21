@@ -18,7 +18,7 @@ const HeaderComponent = () => {
 
   useEffect(() => {
     return () => {
-      document.removeEventListener("click", closeNav);
+      //document.removeEventListener("click", closeNav);
     };
   }, []);
   return (

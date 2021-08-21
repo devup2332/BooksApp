@@ -1,6 +1,12 @@
 export interface Book {
     id: number,
-    image: string,
+    photoUrl: string,
     title: string,
     author: string
+}
+
+export interface GetBooks {
+    data: Book[],
+    loading: boolean,
+    error: string
 }

@@ -1,77 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BookComponent from "../../components/Book/BookComponent";
-import { Book }  from "../../models/book";
-import { Gender } from "../../models/gender";
-import useBooks from "../../hooks/books.hook";
+import useGetBooks from "../../hooks/books.hook";
+import useGetGenres from "../../hooks/genre.hook";
+//import { Scrollbars } from 'react-custom-scrollbars-2';
 
 const HomePage = () => {
 
-  const [genders, setGenders] = useState<Gender[]>([]);
-  const [books, setBooks] = useState<Book[]>([]);
+  let allGenders:any = [];
+  //let booksUrl = 'http://localhost:8000/api/books/';
+  const [booksByGender, setBooksByGender ] = useState('http://localhost:8000/api/books/');
 
-  const [gender, setGender] = useState<number>(1);
 
-  const [getBooks] = useBooks();
-  useEffect(() => {
-     (async()=> {
-      const books = await getBooks();
-      console.log(books)
-    })();
-    document.body.classList.add("light__theme");
-  }, []);
 
-  useEffect(() => {
-    const genderlists = [
-      {id: 1, name: 'All'},
-      {id: 2, name: 'Action'},
-      {id: 3, name: 'Drama'},
-      {id: 4, name: 'Love'},
-      {id: 5, name: 'Mystery'},
-    ];
+  const {data:books} = useGetBooks(booksByGender);
+  console.log(books);
 
-    setGenders(genderlists);
-  }, []);
+  const { data: genders} =  useGetGenres('http://localhost:8000/api/genres');
+   allGenders = genders.map(gender => {
+     return gender.id;
+   })
+  console.log(genders);
 
-  useEffect(() => {
-    const bookLists = [
-      {
-        id: 1,
-        image: 'https://lumiere-a.akamaihd.net/v1/images/image_4f447b1d.jpeg',
-        title: 'Los increibles 2',
-        author: 'increi',
-        gender: 2
-      },
-      {
-        id: 2,
-        image: 'https://i.pinimg.com/236x/d6/53/22/d65322f9e1a1c8d0c9f4fc5fe42c9348.jpg',
-        title: 'Legacy',
-        author: 'Lega',
-        gender: 3
-      }
-    ];
-
-    const bookListsByGender = gender === 1
-              ? bookLists
-              : bookLists.filter(book => book.gender === gender);
-
-    setBooks(bookListsByGender);
-  }, [gender]);
-
-  const genderChange = (id: number) => {
-    setGender(id);
+  const changeGender = (id: number) => {
+    if(allGenders.includes(id)){
+      setBooksByGender(`http://localhost:8000/api/books/byGenre/${id}`)
+    }else{
+      setBooksByGender(`http://localhost:8000/api/books/`)
+    }
   }
 
   return (
     <div className="home-page-container">
-      <br/><br/><br/>
-      <ul className="home-page-container-genders">
-        {
-          genders.map(({id, name}) => (
-            <li className="gender-item" key={id} onClick={() => genderChange(id)}>{name}</li>
-          ))
-        }
-      </ul>
-
+      
+        <ul className="home-page-container-genders scroll">
+          <li className="gender-item" onClick={() => changeGender(0)}>All</li>
+          {
+            genders.map(({id, name}) => (
+              <li className="gender-item" key={id} onClick={() => changeGender(id)}>{name}</li>
+            ))
+          }
+        </ul>
       <div className="home-page-container-books">
         {
           books.map(book => (
