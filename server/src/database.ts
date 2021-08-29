@@ -3,6 +3,7 @@ import { Sequelize } from "sequelize";
 export const sequelize = new Sequelize("booksapp", "oasis", "123456789", {
   host: "db_books",
   dialect: "postgres",
+  logging: false
 });
 
 const connectToDatabase = async () => {
